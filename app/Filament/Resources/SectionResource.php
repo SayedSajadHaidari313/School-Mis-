@@ -74,8 +74,8 @@ class SectionResource extends Resource
     {
         return [
             'index' => Pages\ListSections::route('/'),
-            'create' => Pages\CreateSection::route('/create'),
-            'edit' => Pages\EditSection::route('/{record}/edit'),
+            // 'create' => Pages\CreateSection::route('/create'),
+            // 'edit' => Pages\EditSection::route('/{record}/edit'),
         ];
     }
 }
