@@ -37,6 +37,10 @@ class StudentResource extends Resource
     {
         return static::getModel()::count();
     }
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
 
     public static function form(Form $form): Form
     {

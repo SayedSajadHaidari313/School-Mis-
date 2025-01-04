@@ -29,7 +29,10 @@ class ClassesResource extends Resource
 
     protected static ?string $navigationGroup = 'Student Management';
 
-
+    public static function shouldRegisterNavigation(): bool
+    {
+        return false;
+    }
 
     public static function form(Form $form): Form
     {

@@ -89,7 +89,7 @@ class RoleResource extends Resource
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make()
                     ->before(function (Role $record) {
-                        if ($record->name === 'super-admin') {
+                        if ($record->name === 'Admin') {
                             return false;
                         }
                     }),
@@ -99,7 +99,7 @@ class RoleResource extends Resource
                     Tables\Actions\DeleteBulkAction::make()
                         ->before(function ($records) {
                             return $records->reject(function ($record) {
-                                return $record->name === 'super-admin';
+                                return $record->name === 'Admin';
                             });
                         }),
                 ]),
