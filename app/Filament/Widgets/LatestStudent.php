@@ -3,6 +3,7 @@
 namespace App\Filament\Widgets;
 
 use App\Models\Student;
+use App\Models\User;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -17,7 +18,7 @@ class LatestStudent extends BaseWidget
     {
         return $table
             ->query(
-                Student::query()
+                User::query()
                     ->latest()
                     ->limit(5)
             )
@@ -25,14 +26,10 @@ class LatestStudent extends BaseWidget
                 TextColumn::make('name')
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('email')
+            TextColumn::make('email')->label('Email')
                 ->searchable()
                 ->sortable(),
-            TextColumn::make('section.name')->label('Section')
-                ->badge()
-                ->searchable()
-                ->sortable(),
-            TextColumn::make('classes.name')->label('Class')
+            TextColumn::make('name')->label('Name')
                 ->badge()
                 ->searchable()
                 ->sortable(),

@@ -98,7 +98,9 @@ class ListPackageResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('max_parked_domains')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
                 Tables\Columns\TextColumn::make('max_addon_domains')
                     ->numeric()
                     ->sortable(),
@@ -107,7 +109,8 @@ class ListPackageResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('max_passenger_apps')
                     ->numeric()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('max_hourly_email')
                     ->numeric()
                     ->sortable(),

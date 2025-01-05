@@ -10,6 +10,12 @@ Route::get('/', function () {
 });
 
 Route::get('/testroute', function() {
-    $customer = Customer::find(1);
-    Mail::to('sayedsajadhaidari1@gmail.com')->send(new CustomerRegistered($customer));
+    return view('Mail.customer_registered');
+});
+
+// Customer Routes
+Route::group(['prefix' => 'customer'], function () {
+    Route::get('/login', function() {
+        return view('customer.login');
+    })->name('customer.login');
 });
