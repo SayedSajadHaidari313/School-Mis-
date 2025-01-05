@@ -25,8 +25,9 @@ class BlogPanelProvider extends PanelProvider
         return $panel
             ->id('blog')
             ->path('blog')
+            ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Blue,
             ])
             ->discoverResources(in: app_path('Filament/Blog/Resources'), for: 'App\\Filament\\Blog\\Resources')
             ->discoverPages(in: app_path('Filament/Blog/Pages'), for: 'App\\Filament\\Blog\\Pages')

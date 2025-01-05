@@ -14,8 +14,8 @@ Route::get('/testroute', function() {
 });
 
 // Customer Routes
-Route::group(['prefix' => 'customer'], function () {
-    Route::get('/login', function() {
-        return view('customer.login');
-    })->name('customer.login');
-});
+// Route::group(['prefix' => 'customer'], function () {
+//     Route::get('/login', function() {
+//         return view('customer.login');
+//     })->name('customer.login');
+// });

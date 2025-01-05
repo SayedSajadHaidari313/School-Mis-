@@ -25,7 +25,7 @@ class CustomerRegistered extends Mailable
         $this->customer = $customer;
     }
 
-    /**
+    /** 
      * Get the message envelope.
      */
     public function envelope(): Envelope
@@ -49,7 +49,7 @@ class CustomerRegistered extends Mailable
     }
 
     /**
-     * Get the attachments for the message.
+         * Get the attachments for the message.
      *
      * @return array<int, \Illuminate\Mail\Mailables\Attachment>
      */

@@ -8,6 +8,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Hash;
 
@@ -95,7 +96,14 @@ class UserResource extends Resource
                     ->toggleable(),
             ])
             ->filters([
-                //
+                SelectFilter::make('roles')
+                    ->multiple()
+                    ->preload()
+                    ->relationship('roles', 'name'),
+                SelectFilter::make('permissions')
+                    ->multiple()
+                    ->preload()
+                    ->relationship('permissions', 'name'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
