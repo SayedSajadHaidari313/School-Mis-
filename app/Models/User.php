@@ -3,15 +3,20 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasAvatar   
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, HasPanelShield;
 
     /**
      * The attributes that are mass assignable.
@@ -46,4 +51,17 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        // اگر کاربر تصویر پروفایل دارد، URL آن را بازگردانید
+        return $this->profile?->image 
+            ? Storage::url($this->profile->image)
+            : null; // مقدار پیش‌فرض برای زمانی که تصویر وجود ندارد
+    }
+
 }

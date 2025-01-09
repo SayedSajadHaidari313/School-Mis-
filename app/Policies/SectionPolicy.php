@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Spatie\Permission\Models\Role;
+use App\Models\Section;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class RolePolicy
+class SectionPolicy
 {
     use HandlesAuthorization;
 
@@ -15,19 +15,15 @@ class RolePolicy
      */
     public function viewAny(User $user): bool
     {
-        // return $user->can('view_any_role');
-        return $user->hasRole('super-admin');
-
+        return $user->can('view_any_section');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Role $role): bool
+    public function view(User $user, Section $section): bool
     {
-        // return $user->can('view_role');
-        return $user->hasRole('super-admin');
-
+        return $user->can('view_section');
     }
 
     /**
@@ -35,27 +31,23 @@ class RolePolicy
      */
     public function create(User $user): bool
     {
-        // return $user->can('create_role');
-        return $user->hasRole('super-admin');
-
+        return $user->can('create_section');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Role $role): bool
+    public function update(User $user, Section $section): bool
     {
-        // return $user->can('update_role');
-        return $user->hasRole('super-admin');
-
+        return $user->can('update_section');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Role $role): bool
+    public function delete(User $user, Section $section): bool
     {
-        return $user->can('delete_role');
+        return $user->can('delete_section');
     }
 
     /**
@@ -63,15 +55,15 @@ class RolePolicy
      */
     public function deleteAny(User $user): bool
     {
-        return $user->can('delete_any_role');
+        return $user->can('delete_any_section');
     }
 
     /**
      * Determine whether the user can permanently delete.
      */
-    public function forceDelete(User $user, Role $role): bool
+    public function forceDelete(User $user, Section $section): bool
     {
-        return $user->can('force_delete_role');
+        return $user->can('force_delete_section');
     }
 
     /**
@@ -79,15 +71,15 @@ class RolePolicy
      */
     public function forceDeleteAny(User $user): bool
     {
-        return $user->can('force_delete_any_role');
+        return $user->can('force_delete_any_section');
     }
 
     /**
      * Determine whether the user can restore.
      */
-    public function restore(User $user, Role $role): bool
+    public function restore(User $user, Section $section): bool
     {
-        return $user->can('restore_role');
+        return $user->can('restore_section');
     }
 
     /**
@@ -95,15 +87,15 @@ class RolePolicy
      */
     public function restoreAny(User $user): bool
     {
-        return $user->can('restore_any_role');
+        return $user->can('restore_any_section');
     }
 
     /**
      * Determine whether the user can replicate.
      */
-    public function replicate(User $user, Role $role): bool
+    public function replicate(User $user, Section $section): bool
     {
-        return $user->can('replicate_role');
+        return $user->can('replicate_section');
     }
 
     /**
@@ -111,6 +103,6 @@ class RolePolicy
      */
     public function reorder(User $user): bool
     {
-        return $user->can('reorder_role');
+        return $user->can('reorder_section');
     }
 }

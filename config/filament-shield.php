@@ -12,7 +12,9 @@ return [
         'is_scoped_to_tenant' => true,
         'cluster' => null,
     ],
-
+    'generator' => [
+        'option' => 'only_policies',
+    ],
     'tenant_model' => null,
 
     'auth_provider_model' => [
@@ -75,7 +77,13 @@ return [
             'AccountWidget', 'FilamentInfoWidget',
         ],
 
-        'resources' => [],
+        'resources' => [
+    'App\Filament\Resources\UserResource',
+    'App\Filament\Resources\CustomerResource',
+],
+        'shield_resource' => [
+    'should_register_navigation' => true, // باید true باشد.
+],
     ],
 
     'discovery' => [

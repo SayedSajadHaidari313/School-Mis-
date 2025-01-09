@@ -4,15 +4,20 @@ namespace App\Policies;
 
 use App\Models\User;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class PermissionPolicy
 {
+    use HandlesAuthorization;
+
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
+        // return $user->can('view_any_permission');
         return $user->hasRole('super-admin');
+
     }
 
     /**
@@ -20,7 +25,7 @@ class PermissionPolicy
      */
     public function view(User $user, Permission $permission): bool
     {
-        return $user->hasRole('super-admin');
+        return $user->can('view_permission');
     }
 
     /**
@@ -28,7 +33,9 @@ class PermissionPolicy
      */
     public function create(User $user): bool
     {
+        // return $user->can('create_permission');
         return $user->hasRole('super-admin');
+
     }
 
     /**
@@ -36,7 +43,7 @@ class PermissionPolicy
      */
     public function update(User $user, Permission $permission): bool
     {
-        return $user->hasRole('super-admin');
+        return $user->can('update_permission');
     }
 
     /**
@@ -44,22 +51,62 @@ class PermissionPolicy
      */
     public function delete(User $user, Permission $permission): bool
     {
-        return $user->hasRole('super-admin');
+        return $user->can('delete_permission');
     }
 
     /**
-     * Determine whether the user can restore the model.
+     * Determine whether the user can bulk delete.
      */
-    public function restore(User $user, Permission $permission): bool
+    public function deleteAny(User $user): bool
     {
-        return false;
+        return $user->can('delete_any_permission');
     }
 
     /**
-     * Determine whether the user can permanently delete the model.
+     * Determine whether the user can permanently delete.
      */
     public function forceDelete(User $user, Permission $permission): bool
     {
-        return false;
+        return $user->can('force_delete_permission');
+    }
+
+    /**
+     * Determine whether the user can permanently bulk delete.
+     */
+    public function forceDeleteAny(User $user): bool
+    {
+        return $user->can('force_delete_any_permission');
+    }
+
+    /**
+     * Determine whether the user can restore.
+     */
+    public function restore(User $user, Permission $permission): bool
+    {
+        return $user->can('restore_permission');
+    }
+
+    /**
+     * Determine whether the user can bulk restore.
+     */
+    public function restoreAny(User $user): bool
+    {
+        return $user->can('restore_any_permission');
+    }
+
+    /**
+     * Determine whether the user can replicate.
+     */
+    public function replicate(User $user, Permission $permission): bool
+    {
+        return $user->can('replicate_permission');
+    }
+
+    /**
+     * Determine whether the user can reorder.
+     */
+    public function reorder(User $user): bool
+    {
+        return $user->can('reorder_permission');
     }
 }

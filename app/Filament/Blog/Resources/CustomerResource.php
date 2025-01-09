@@ -1,32 +1,24 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Blog\Resources;
 
-use App\Filament\Resources\CustomerResource\Pages;
-use App\Filament\Resources\CustomerResource\RelationManagers;
-use App\Mail\CustomerRegistered;
+use App\Filament\Blog\Resources\CustomerResource\Pages;
+use App\Filament\Blog\Resources\CustomerResource\RelationManagers;
 use App\Models\Customer;
 use Filament\Forms;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Mail;
 
 class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?int $navigationSort = 1;
-
-    protected static ?string $navigationGroup = 'Customer Management';
-  
     public static function form(Form $form): Form
     {
         return $form
@@ -49,12 +41,7 @@ class CustomerResource extends Resource
                 Forms\Components\TextInput::make('address')
                     ->maxLength(255)
                     ->default(null),
-                    Select::make('status')
-                    ->label('Status')
-                    ->options([
-                        'active' => 'Active',
-                        'inactive' => 'Inactive',
-                    ])
+                Forms\Components\TextInput::make('status')
                     ->required(),
             ]);
     }
@@ -71,13 +58,7 @@ class CustomerResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                ->badge()
-                ->color(fn ($state) => [
-                    'active' => 'success',
-                    'inactive' => 'danger',
-                ][$state] ?? 'secondary') // رنگ پیش‌فرض
-                ->sortable(),
+                Tables\Columns\TextColumn::make('status'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -92,8 +73,6 @@ class CustomerResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                DeleteAction::make(),
-
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -116,10 +95,5 @@ class CustomerResource extends Resource
             'create' => Pages\CreateCustomer::route('/create'),
             'edit' => Pages\EditCustomer::route('/{record}/edit'),
         ];
-    }
-    public static function afterCreate(Customer $customer): void
-    {
-        // ارسال ایمیل پس از ذخیره مشتری
-        Mail::to($customer->email)->send(new CustomerRegistered($customer));
     }
 }
