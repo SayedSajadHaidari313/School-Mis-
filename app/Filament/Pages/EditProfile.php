@@ -42,10 +42,10 @@ class EditProfile extends Page implements HasForms
                     ->required()
                     ->placeholder('Enter your phone number'),
                 FileUpload::make('image')
-                    ->directory('profile-images')
                     ->image()
                     ->required()
-                    ->label('Profile Image'),
+                    ->label('Profile Image')
+                    ->imageEditor(),
             ])
             ->statePath('data'); // Ensure this is correctly placed after the schema
     }

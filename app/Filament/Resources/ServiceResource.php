@@ -35,7 +35,7 @@ class ServiceResource extends Resource
                 ->required()
                 ->label('List Service'),
                 Forms\Components\Select::make('customer_id')
-                ->relationship('customer', 'name')
+                ->relationship('customer', 'address')
                 ->searchable()
                 ->preload()
                 ->required()
@@ -66,7 +66,7 @@ class ServiceResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('customer.name')
+                Tables\Columns\TextColumn::make('customer.address')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('listService.services_name')

@@ -8,20 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'user_id',
         'phone',
         'address',
         'status',
     ];
 
-    protected $dispatchesEvents = [
-        'created' => CustomerCreated::class,
-    ];
+    // protected $dispatchesEvents = [
+    //     'created' => CustomerCreated::class,
+    // ];
 
     // public function domains()
     // {
     //     return $this->hasMany(Domain::class);
     // }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+    public function list_service()
+    {
+        return $this->belongsTo(ListService::class);
+    }
 }

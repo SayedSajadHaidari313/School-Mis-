@@ -14,6 +14,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use PhpParser\Node\Stmt\Label;
+use Illuminate\Contracts\Support\Htmlable;
 
 class DomainResource extends Resource
 {
@@ -24,6 +25,10 @@ class DomainResource extends Resource
 
     protected static ?string $navigationGroup = 'Customer Management';
 
+    // public static function getGlobalSearchResultTitle(Model $record): string | Htmlable
+    // {
+    //     return $record->name;
+    // }
     public static function form(Form $form): Form
     {
         return $form

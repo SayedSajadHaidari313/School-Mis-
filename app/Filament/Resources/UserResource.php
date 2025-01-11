@@ -3,6 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
+use App\Mail\UserCreated;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -10,18 +11,28 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Support\Facades\Mail;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
+    
+    // protected static ?string $recordTitleAttribute = 'name';
 
     protected static ?string $navigationGroup = 'Administration';
 
     protected static ?int $navigationSort = 1;
 
+ 
+    // public static function getGlobalSearchResultTitle(Model $record): string | Htmlable
+    // {
+    //     return $record->name;
+    // }
     
     public static function form(Form $form): Form
     {
@@ -134,4 +145,10 @@ class UserResource extends Resource
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
+    // public static function afterCreate(User $user)
+    // {
+    //     if ($user->roles()->where('name', 'customer')->exists()) {
+    //         Mail::to($user->email)->send(new \App\Mail\UserCreated($user));
+    //     }
+    // }
 }

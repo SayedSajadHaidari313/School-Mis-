@@ -6,6 +6,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\MenuItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -24,11 +25,19 @@ class BlogPanelProvider extends PanelProvider
     {
         return $panel
             ->id('blog')
-            ->path('blog')
+            ->path('customer')
             ->login()
             ->colors([
                 'primary' => Color::Blue,
+                'gray' => Color::Slate,
             ])
+            ->brandName('Naikbeen Control Panel')
+            ->profile(isSimple: false)
+            ->userMenuItems([
+                'profile' => MenuItem::make()->label('Edit profile'),
+                // ...
+            ])
+            ->topNavigation()
             ->discoverResources(in: app_path('Filament/Blog/Resources'), for: 'App\\Filament\\Blog\\Resources')
             ->discoverPages(in: app_path('Filament/Blog/Pages'), for: 'App\\Filament\\Blog\\Pages')
             ->pages([
@@ -36,8 +45,8 @@ class BlogPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Blog/Widgets'), for: 'App\\Filament\\Blog\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                // Widgets\AccountWidget::class,
+                // Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

@@ -27,49 +27,7 @@ class ListPackageResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\Textarea::make('description')
-                    ->columnSpanFull(),
-                Forms\Components\TextInput::make('disk_space_quota')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('bandwidth_limit')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('max_ftp_accounts')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('max_email_accounts')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('max_sql_databases')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('max_sub_domains')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('max_parked_domains')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('max_addon_domains')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('max_mailing_lists')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('max_passenger_apps')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('max_hourly_email')
-                    ->numeric()
-                    ->default(null),
-                Forms\Components\TextInput::make('max_email_quota_per_address')
-                    ->numeric()
-                    ->default(null),
-            ]);
+            ->schema(ListPackage::getForm());
     }
 
     public static function table(Table $table): Table

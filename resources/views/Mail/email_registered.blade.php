@@ -1,4 +1,4 @@
-{{-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Welcome to Our Service</title>
@@ -16,7 +16,7 @@
             <!-- Main Content -->
             <div class="p-6">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Hello 
-                    {{ $customer->name }}!
+                    {{ $user->name }}!
                 </h2>
                 
                 <p class="text-gray-600 mb-6">Your account has been successfully created. Below are your account details:</p>
@@ -28,13 +28,13 @@
                         <div class="flex items-center">
                             <span class="text-gray-600 w-24">Email:</span>
                             <span class="text-gray-800 font-medium">
-                                {{ $customer->email }}
+                                {{ $user->email }}
                             </span>
                         </div>
                         <div class="flex items-center">
                             <span class="text-gray-600 w-24">Password:</span>
                             <span class="text-gray-800 font-medium">
-                                {{ $customer->password }}
+                                {{ $user->password }}
                             </span>
                         </div>
                     </div>
@@ -47,13 +47,13 @@
                         <div class="flex items-center">
                             <span class="text-gray-600 w-24">Phone:</span>
                             <span class="text-gray-800">
-                                {{ $customer->phone }}
+                                {{ $user->phone }}
                             </span>
                         </div>
                         <div class="flex items-center">
                             <span class="text-gray-600 w-24">Address:</span>
                             <span class="text-gray-800">
-                                {{ $customer->address }}
+                                {{ $user->address }}
 
                             </span>
                         </div>
@@ -91,4 +91,4 @@
         </div>
     </div>
 </body>
-</html> --}}
+</html>

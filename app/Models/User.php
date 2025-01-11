@@ -25,6 +25,7 @@ class User extends Authenticatable implements HasAvatar
      */
     protected $fillable = [
         'name',
+        'role_id',
         'email',
         'password',
     ];
@@ -63,5 +64,10 @@ class User extends Authenticatable implements HasAvatar
             ? Storage::url($this->profile->image)
             : null; // مقدار پیش‌فرض برای زمانی که تصویر وجود ندارد
     }
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+   
 
 }
