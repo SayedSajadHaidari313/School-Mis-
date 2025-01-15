@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\ServiceResource\Pages;
+namespace App\Filament\Resources\EmailResource\Pages;
 
-use App\Filament\Resources\ServiceResource;
+use App\Filament\Resources\EmailResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListServices extends ListRecords
+class ListEmails extends ListRecords
 {
-    protected static string $resource = ServiceResource::class;
+    protected static string $resource = EmailResource::class;
 
     protected function getHeaderActions(): array
     {
