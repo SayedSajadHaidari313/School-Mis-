@@ -13,10 +13,10 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable implements HasAvatar   
+class User extends Authenticatable implements HasAvatar
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles, HasPanelShield;
+    use HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -60,14 +60,14 @@ class User extends Authenticatable implements HasAvatar
     public function getFilamentAvatarUrl(): ?string
     {
         // اگر کاربر تصویر پروفایل دارد، URL آن را بازگردانید
-        return $this->profile?->image 
+        return $this->profile?->image
             ? Storage::url($this->profile->image)
             : null; // مقدار پیش‌فرض برای زمانی که تصویر وجود ندارد
     }
-    public function service()
+    public function order()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Order::class);
     }
-   
+
 
 }

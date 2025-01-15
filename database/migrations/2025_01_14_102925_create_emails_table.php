@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('list_services', function (Blueprint $table) {
+        Schema::create('emails', function (Blueprint $table) {
             $table->id();
-            $table->string('services_name');
-            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->string('email_name');
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('list_services');
+        Schema::dropIfExists('emails');
     }
 };

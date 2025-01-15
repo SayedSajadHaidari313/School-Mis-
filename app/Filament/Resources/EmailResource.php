@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DomainResource\Pages;
-use App\Filament\Resources\DomainResource\RelationManagers;
-use App\Models\Domain;
+use App\Filament\Resources\EmailResource\Pages;
+use App\Filament\Resources\EmailResource\RelationManagers;
+use App\Models\Email;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,9 +13,9 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class DomainResource extends Resource
+class EmailResource extends Resource
 {
-    protected static ?string $model = Domain::class;
+    protected static ?string $model = Email::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -23,9 +23,7 @@ class DomainResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('domain_name')
-                    ->required()
-                    ->maxLength(255),
+                //
             ]);
     }
 
@@ -33,16 +31,7 @@ class DomainResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('domain_name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                //
             ])
             ->filters([
                 //
@@ -67,9 +56,9 @@ class DomainResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDomains::route('/'),
-            'create' => Pages\CreateDomain::route('/create'),
-            'edit' => Pages\EditDomain::route('/{record}/edit'),
+            'index' => Pages\ListEmails::route('/'),
+            // 'create' => Pages\CreateEmail::route('/create'),
+            'edit' => Pages\EditEmail::route('/{record}/edit'),
         ];
     }
 }
