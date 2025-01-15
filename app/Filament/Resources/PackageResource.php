@@ -6,6 +6,8 @@ use App\Filament\Resources\PackageResource\Pages;
 use App\Filament\Resources\PackageResource\RelationManagers;
 use App\Models\Package;
 use Filament\Forms;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -17,7 +19,9 @@ class PackageResource extends Resource
 {
     protected static ?string $model = Package::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-check';
+
+    protected static ?string $navigationGroup = 'Service Management';
 
     public static function form(Form $form): Form
     {
@@ -26,49 +30,46 @@ class PackageResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('description')
+                Forms\Components\RichEditor::make('description')
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('disk_space_quota')
-                    ->maxLength(255)
                     ->default(null),
                 Forms\Components\TextInput::make('bandwidth_limit')
-                    ->maxLength(255)
+
                     ->default(null),
                 Forms\Components\TextInput::make('max_ftp_accounts')
-                    ->maxLength(255)
+
                     ->default(null),
                 Forms\Components\TextInput::make('max_email_accounts')
-                    ->email()
-                    ->maxLength(255)
+
                     ->default(null),
                 Forms\Components\TextInput::make('max_sql_databases')
-                    ->maxLength(255)
+
                     ->default(null),
                 Forms\Components\TextInput::make('max_sub_domains')
-                    ->maxLength(255)
+
                     ->default(null),
                 Forms\Components\TextInput::make('max_parked_domains')
-                    ->maxLength(255)
+
                     ->default(null),
                 Forms\Components\TextInput::make('max_addon_domains')
-                    ->maxLength(255)
+
                     ->default(null),
                 Forms\Components\TextInput::make('max_mailing_lists')
-                    ->maxLength(255)
+
                     ->default(null),
                 Forms\Components\TextInput::make('max_passenger_apps')
-                    ->maxLength(255)
+
                     ->default(null),
                 Forms\Components\TextInput::make('max_hourly_email')
-                    ->email()
-                    ->maxLength(255)
+
                     ->default(null),
                 Forms\Components\TextInput::make('max_email_quota_per_address')
-                    ->email()
-                    ->maxLength(255)
+
                     ->default(null),
             ]);
-    }
+            }
+
 
     public static function table(Table $table): Table
     {
@@ -114,6 +115,7 @@ class PackageResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

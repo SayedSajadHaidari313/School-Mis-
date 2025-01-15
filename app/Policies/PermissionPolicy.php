@@ -15,9 +15,7 @@ class PermissionPolicy
      */
     public function viewAny(User $user): bool
     {
-        // return $user->can('view_any_permission');
-        return $user->hasRole('super-admin');
-
+        return $user->can('view_any_permission');
     }
 
     /**
@@ -33,9 +31,7 @@ class PermissionPolicy
      */
     public function create(User $user): bool
     {
-        // return $user->can('create_permission');
-        return $user->hasRole('super-admin');
-
+        return $user->can('create_permission');
     }
 
     /**

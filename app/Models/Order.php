@@ -8,6 +8,7 @@ class Order extends Model
 {
     protected $fillable = [
         'customer_id',
+        'user_id',
         'package_id',
         'domain_id',
         'email_id',
@@ -16,4 +17,23 @@ class Order extends Model
         'price',
         'status',
     ];
+    
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
+    }
+
+    public function email()
+    {
+        return $this->belongsTo(Email::class, 'email_id');
+    }
+
+    public function domain()
+    {
+        return $this->belongsTo(Domain::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }

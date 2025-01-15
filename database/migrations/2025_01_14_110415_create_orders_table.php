@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('package_id')->nullable();
             $table->unsignedBigInteger('domain_id')->nullable();
             $table->unsignedBigInteger('email_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->decimal('price');
             $table->date('order_date');
             $table->date('expire_date');
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->foreign('domain_id')->references('id')->on('domains')->onDelete('cascade');
             $table->foreign('package_id')->references('id')->on('packages')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('email_id')->references('id')->on('emails')->onDelete('cascade');
             $table->timestamps();
         });

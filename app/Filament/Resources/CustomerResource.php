@@ -36,12 +36,13 @@ class CustomerResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
+                ->label('Customer')
+                ->preload()
                     ->relationship('user', 'name', function (Builder $query) {
                         $query->whereHas('roles', function (Builder $query) {
                             $query->where('name', 'customer');
                         });
                     })
-                    ->preload()
                     ->required()
                     ->searchable(),
                 Forms\Components\TextInput::make('phone')
@@ -69,7 +70,7 @@ class CustomerResource extends Resource
                     ->label('Name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user.email')
+                Tables\Columns\TextColumn::make('email.email_name')
                     ->label('Email')
                     ->searchable()
                     ->sortable(),

@@ -26,8 +26,4 @@ class Customer extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function list_service()
-    {
-        return $this->belongsTo(ListService::class);
-    }
 }
