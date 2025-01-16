@@ -35,6 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Naikbeen Control Panel')
             // ->brandLogo('/image/logo.png')
             ->profile(isSimple: false)
+            // ->databaseNotifications(true)
             // ->topNavigation()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')

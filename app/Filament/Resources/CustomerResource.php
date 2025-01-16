@@ -10,6 +10,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ActionGroup as ActionsActionGroup;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 
@@ -71,7 +72,7 @@ class CustomerResource extends Resource
                     ->label('Name')
                     ->searchable()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('email.email_name')
+                Tables\Columns\TextColumn::make('user.email')
                     ->label('Email')
                     ->searchable()
                     ->sortable(),
@@ -83,8 +84,8 @@ class CustomerResource extends Resource
                     ->searchable()
                     ->badge()
                     ->colors([
-                        'primary' => 'Active',
-                        'danger' => 'Inactive',
+                        'primary' => 'active',
+                        'danger' => 'inactive',
                     ]),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -100,11 +101,11 @@ class CustomerResource extends Resource
                 //
             ])
             ->actions([
-                // ActionGroup::make([
+                ActionsActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\DeleteAction::make(),
                     Tables\Actions\ViewAction::make(),
-                // ]),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -20,7 +20,7 @@ class CustomerResource extends Resource
 {
     protected static ?string $model = Customer::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
     public static function form(Form $form): Form
     {
@@ -51,35 +51,18 @@ class CustomerResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->query(Customer::where('user_id', auth()->id())) // فیلتر بر اساس کاربر وارد شده
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
-                    ->label('Name')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('user.email')
-                    ->label('Email')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('phone')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('address')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->searchable()
-                    ->badge()
-                    ->colors([
-                        'primary' => 'Active',
-                        'danger' => 'Inactive',
-                    ]),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-
+                Tables\Columns\TextColumn::make('user.name')->label('Name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('user.email')->label('Email')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('phone')->searchable(),
+                Tables\Columns\TextColumn::make('address')->searchable(),
+                Tables\Columns\TextColumn::make('status')->badge()->colors([
+                    'primary' => 'Active',
+                    'danger' => 'Inactive',
+                ]),
+                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable(),
             ])
             ->filters([
                 //
@@ -87,7 +70,6 @@ class CustomerResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
-                // Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -95,6 +77,7 @@ class CustomerResource extends Resource
                 ]),
             ]);
     }
+
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
@@ -114,21 +97,20 @@ class CustomerResource extends Resource
                                 TextEntry::make('phone')->label('Phone'),
                                 TextEntry::make('address')->label('Address'),
                                 TextEntry::make('status')->label('Status')
-                                ->badge()
-                                ->color(function($state){
-                                    if($state == 'active'){
-                                        return 'success';
-                                    }
-                                    return 'danger';
-                                }),
+                                    ->badge()
+                                    ->color(function ($state) {
+                                        if ($state == 'active') {
+                                            return 'success';
+                                        }
+                                        return 'danger';
+                                    }),
                             ]),
                     ]),
                 Section::make('Information Packages')
-                ->schema([
-                    TextEntry::make('list_service.services_name')->label('Name'),
-                ]), 
+                    ->schema([
+                        TextEntry::make('list_service.services_name')->label('Name'),
+                    ]),
             ]);
-
     }
 
     public static function getRelations(): array
