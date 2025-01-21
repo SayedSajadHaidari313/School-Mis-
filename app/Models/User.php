@@ -64,10 +64,13 @@ class User extends Authenticatable implements HasAvatar
             ? Storage::url($this->profile->image)
             : null; // مقدار پیش‌فرض برای زمانی که تصویر وجود ندارد
     }
-    public function order()
+    // public function order()
+    // {
+    //     return $this->belongsTo(Order::class);
+    // }
+    public function orders()
     {
-        return $this->belongsTo(Order::class);
+        return $this->hasMany(Order::class);
     }
-
 
 }

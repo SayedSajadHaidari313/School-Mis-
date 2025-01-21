@@ -82,12 +82,16 @@ class CustomerResource extends Resource
     {
         return $infolist
             ->schema([
+
                 Section::make('Customer Information')
                     ->columns(3)
-
                     ->schema([
-                        ImageEntry::make('user.image')->label('Avatar')
-                            ->circular(),
+                        ImageEntry::make('user.image')
+                            ->label('Avatar')
+                            ->circular()
+                            ->default(function ($record) {
+                                return $record->getFilamentAvatarUrl(); // فراخوانی از مدل Customer
+                            }),
                         Group::make()
                             ->columnSpan(2)
                             ->columns(3)
@@ -105,13 +109,30 @@ class CustomerResource extends Resource
                                         return 'danger';
                                     }),
                             ]),
-                    ]),
-                Section::make('Information Packages')
-                    ->schema([
-                        TextEntry::make('list_service.services_name')->label('Name'),
-                    ]),
-            ]);
+                ]),
+                Section::make('Orders Information')
+                ->schema([
+                    Group::make()
+                        ->label('Orders')
+                        ->schema([
+                            TextEntry::make('orders.0.package.name')->label('Package Name'),
+                            TextEntry::make('orders.0.domain.domain_name')->label('Domain'),
+                            TextEntry::make('orders.0.email.email_name')->label('Email'),
+                            TextEntry::make('orders.0.price')->label('Price')->prefix('$'),
+                            TextEntry::make('orders.0.order_date')->label('Order Date')->date(),
+                            TextEntry::make('orders.0.expire_date')->label('Expire Date')->date(),
+                            TextEntry::make('orders.0.status')->label('Status')
+                                ->badge()
+                                ->colors([
+                                    'primary' => 'ACTIVE',
+                                    'danger' => 'EXPIRED',
+                                    'warning' => '30_DAYS_EXPIRED',
+                                ]),
+                        ]),
+                ]),
+        ]);
     }
+
 
     public static function getRelations(): array
     {
@@ -127,7 +148,6 @@ class CustomerResource extends Resource
             'create' => Pages\CreateCustomer::route('/create'),
             'edit' => Pages\EditCustomer::route('/{record}/edit'),
             'view' => Pages\ViewCustomer::route('/{record}'),
-
         ];
     }
 }

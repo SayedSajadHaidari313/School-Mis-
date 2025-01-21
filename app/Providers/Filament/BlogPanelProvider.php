@@ -27,6 +27,7 @@ class BlogPanelProvider extends PanelProvider
             ->id('blog')
             ->path('customer')
             ->login()
+            ->spa()
             ->colors([
                 'primary' => Color::Blue,
                 'gray' => Color::Slate,
