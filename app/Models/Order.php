@@ -17,7 +17,7 @@ class Order extends Model
         'price',
         'status',
     ];
-    
+
     public function package()
     {
         return $this->belongsTo(Package::class);
@@ -32,8 +32,13 @@ class Order extends Model
     {
         return $this->belongsTo(Domain::class);
     }
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
+    }
+    public function customer()
+    {
+        return $this->belongsTo(Customer::class);
     }
 
 }
